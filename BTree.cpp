@@ -6,15 +6,9 @@ public:
     BinaryTreeNode* left_;
     BinaryTreeNode* right_;
 
-    BinaryTreeNode(int value) :
-        value_(value),
-        left_(nullptr),
-        right_(nullptr)
-    {
-    }
-
-    ~BinaryTreeNode()
-    {
+    BinaryTreeNode(int value) : value_(value),left_(nullptr),right_(nullptr){} 
+    
+    ~BinaryTreeNode(){
         delete left_;
         delete right_;
     }
