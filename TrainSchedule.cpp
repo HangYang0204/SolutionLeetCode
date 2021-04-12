@@ -2,51 +2,46 @@
 #include<vector>
 #include<unordered_map>
 #include<string>
-
-class Solution{
+#include<algorithm>
+/*
+There are 5 stops for trains with the following schedule
+[0, 15, 25, 40, 60]
+[10, -, 30, - , 50]
+[15, -, - , - , 55]
+Q1: From stop A to B, find the train with earliest arrival 
+Q2: If we can transfer, from A to B, find best train(s) for eariliest arrival
+*/
+class SolutionQ1{
 public:
-	void TrainToTake(int fromStop, int toStop){
+	int TrainToTake(int fromStop, int toStop){
 		std::unordered_map<int,std::vector<int>> ScheduleByTrain;
 		ScheduleByTrain.insert({1, {0,15,25,40,60}});
 		ScheduleByTrain.insert({2, {10,-1,30,-1,50}});
-		ScheduleByTrain.insert({3, {15,-1,-1,-1,55}});
-
-		int TrainNumber = 0;
-		std::unordered_map<int,int> TrainTime;
-		int res[3];
+		ScheduleByTrain.insert({3, {15,-1,-1,-1,55}});	
+		std::vector<int> TrainArrival;
 		for(int i = 0; i < 3; i++){
-			std::vector<int> schedule = ScheduleByTrain[i + 1];
-			if(schedule[fromStop - 1] < 0 || schedule[toStop - 1] < 0){
-				res[i] = 100 + i;
-			}
-			else{
-				res[i] = schedule[toStop -1] - schedule[fromStop - 1];
-			}
-			if(TrainTime.count(res[i])){
-				TrainTime[res[i]] = i + 1;
-			}
+			std::vector<int> Schedule = ScheduleByTrain[i + 1];
+			TrainArrival.push_back(Schedule[toStop]);
 		}
-		for(int j = 0; j <  3; j++){
-			std::string traveltime;
-			if(res[j] > 100){
-				traveltime = "NA";
-			}
-			else{
-				traveltime = std::to_string(res[j]);
-			}
-			std::cout << "Train " + std::to_string(j+1) + " : Travel time = " + traveltime << std::endl;
-		}
+		 
+		int TrainIdx = 1 + std::min_element(TrainArrival.begin(),TrainArrival.end()) - TrainArrival.begin();
+		int minScheduleTime = *std::min_element(TrainArrival.begin(),TrainArrival.end());
+		memo[TrainIdx] = minScheduleTime;
+		return TrainIdx;
+		
 	}
+private:
+	std::unordered_map<int, int> memo;//stores (train with minimal arrival time : stop)
 };
 
 int main(){
-	Solution s;
+	SolutionQ1 s;
 	int fromstop;
 	int tostop;
 	std::cout << "Type in the start stop number(1-5): " << std::endl;
 	std::cin >> fromstop;
 	std::cout << "Now type in the end stop number(2-5):" << std::endl;
 	std::cin >> tostop;
-	s.TrainToTake(fromstop,tostop);
+	std::cout << s.TrainToTake(fromstop,tostop) << std::endl;
 	return 0;
 }
