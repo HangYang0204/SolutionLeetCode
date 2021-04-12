@@ -21,7 +21,9 @@ public:
 		std::vector<int> TrainArrival;
 		for(int i = 0; i < 3; i++){
 			std::vector<int> Schedule = ScheduleByTrain[i + 1];
-			TrainArrival.push_back(Schedule[toStop]);
+			if(Schedule[toStop] > 0){
+				TrainArrival.push_back(Schedule[toStop]);
+			}
 		}
 		 
 		int TrainIdx = 1 + std::min_element(TrainArrival.begin(),TrainArrival.end()) - TrainArrival.begin();
@@ -32,6 +34,12 @@ public:
 	}
 private:
 	std::unordered_map<int, int> memo;//stores (train with minimal arrival time : stop)
+};
+
+class SolutionQ2{
+public:
+
+
 };
 
 int main(){
