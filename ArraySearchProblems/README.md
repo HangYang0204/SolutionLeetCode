@@ -1,4 +1,4 @@
-## Find maximum or minmum element from an Array
+## Find maximum or minimum element from an Array
 Iterate through an array with a while loop or for loop is great way will first come to mind. Now in order to find max/min element, we need to compare 2 elements when we loop through the array. Thus we should maintain 2 iterators. 
 
 lf our goal is to find the maxmium, for example,set the 2 iterators to be i and j. Initially i = 0 and j = 1.We move j forward and update i conditonally:
@@ -39,4 +39,4 @@ Algorithm:
 3. the same reasoning can be formed if MAX sliced into right part. {a[0]}, {a[1]....a[N-1]}
 4. Now we need to compare the result from step 3 and 4 to find the global minimum then return the slicing scheme accordingly. 
 
-
+__Note that : this solution can only give one possible way to slice it. the complete list of ways to slice need further efforts__
