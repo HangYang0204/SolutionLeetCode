@@ -27,3 +27,41 @@ its pretty much the same see below:
     //const as function return 
     const int functionD(){return 1;};
 ```
+## Array
+Array is a list of variables in a given range of memory. There are 2 ways to define array: 1. On stack 2. On heap. they have different lifetime. if created by new key words, remember to deletep[] it. 
+```c++
+    int myArray[5];//created on stack
+    int* p = myArray; //this indicates an array is a [type] pointer. 
+    int* another = new int[5];//created on heap
+    delete[] another;//remember to destory it to allocate memory. 
+```
+more array and pointer examples:
+```c++
+    int myArray[5];
+    for(int i = 0; i < 5; i++)
+        myArray[i] = 2;
+    int* p = myArray;
+    *(p + 2) = 6;// == myArray[2] = 6
+    //here is a small take away
+    *(int*)((char*)p + 8) = 6; //char is 1 byte while int is 4 byte thus 8. 
+    //above (int*)8 = 2 
+    std::cout << myArray[2];
+
+```
+So using an array one must alwasy maintain its size. If you want to have an array member in your class, you can maintain the size using static and const:
+```c++
+class ArrayEntity{
+public:
+    static const count = 5;
+    int myArray[count];
+
+};
+```
+after c++11 we have array in the STL see below:
+```c++
+#include<array>
+std::array<int,5> myArray;
+//now one can use size() like a container
+for(int i = 0; i < myArray.size(); i++)
+    myArray[i] = 2;
+```
