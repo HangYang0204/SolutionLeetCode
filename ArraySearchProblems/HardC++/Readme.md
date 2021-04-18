@@ -65,3 +65,73 @@ std::array<int,5> myArray;
 for(int i = 0; i < myArray.size(); i++)
     myArray[i] = 2;
 ```
+## Function pointer
+Function pointer is way to assign a function to a variable. See below example to see the usages:
+```c++
+#include<vector>
+#include<iostream>
+
+void PrintValue(int value){
+    std::cout << "Value: " << value << std::endl;
+}
+
+void ForEach(std::vector<int>& values, void(*func)(int)){
+    for(int value : values){
+        func(value);
+    }
+}
+
+int main(){
+    std::vector<int> values = {1,2,3,4,6};
+    ForEach(values,PrintValue);
+}
+```
+see how concise the expression become for the "might be" difficult idea at first thought. 
+
+## 2D array
+A 2D array is an array pointer of type array. 
+```c++
+#include<iostream>
+
+int* array = new int[5];// 1D array of size 5
+int** aray2D = new int*[5];// 1D array of array -> 2D array. 
+for(int x = 0; x < 5; x ++){
+    for(int y = 0; y < 5; y++){
+        array2D[x][y] = 2;
+    }
+}
+//to delete 2D array one should delete the 25 int data in the memory lake 
+//then destory the pointer array:
+for(int i = 0; int i < 5; i++){
+    delete[] array2D[i];
+}
+delete[] array2D[];
+```
+The 2D array defined in above code only allocate 5 * 4 = 20 byte memory. The y loop just define the array int type data, the x loop defines the array each of those 5 pointers would point to. It causes memory fragement and poor in performance. 
+
+One can actually use 1D array instead, see below:
+```c++
+int* array = new int[5*5];
+for(int x = 0; x < 5*5; x++){
+    for(int y = 0; y < 5; y++){
+        array[x + y*5] = 2;
+  }
+}
+```
+With the idea above one can wrap it into a class to make it easier to understand. 
+```c++
+class Matrix
+{
+    
+    size_t index( int x, int y ) const { return x + m_width * y; }
+};
+```
+or use STL vector :) 
+```c++
+#include<vector>
+using std::vector;
+
+vector<vector<int>> array2D(5, vector<int>(5)); //a 5 * 5 2D array
+
+```
+Unless you are not allowed to use STL, just use vector container!
