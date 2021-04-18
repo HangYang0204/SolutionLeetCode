@@ -135,3 +135,13 @@ vector<vector<int>> array2D(5, vector<int>(5)); //a 5 * 5 2D array
 
 ```
 Unless you are not allowed to use STL, just use vector container!
+
+## Lambdas
+Whenever you have a function pointer, you can use Lambdas, defines a function without define a function. 
+```c++
+auto lambda = [](int value){cout << "value" << value << endl;};
+ForEach(values, lambda);
+
+```
+In previous example, we used function pointer in the definition of ForEach ```ForEach(vector<int>& values, void(*func)(int))```
+now one can simply using a lambda to replace it. You don't need to write the function```PrintValue``` seperately.  

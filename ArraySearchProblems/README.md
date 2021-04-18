@@ -16,6 +16,52 @@ if array[i] < array[j] then we update i = j and once the while loop ended, i wil
     }
     return i
 ```
+## Find Kth largest/smallest elements in an Array
+Taken kth largest problem for example. One can loop through the array and push array elements in a k size min heap, after the loop, the heap stores the kth largest. 
+Maintain the heap with following conditions:
+1. If heap.size > k, heap.pop
+2. If heap.size <= k or heap.top < array[i] where i is current iteration then heap.push(array[i])
+```c++
+    //c++ use priority_queue to implement a heap 
+    //by default a priority_queue is a max heap
+    #include<priority_queue>
+    #include<vector>
+    using vector;
+    using priority_queue;
+
+    int main(){
+        priority_queue<int> max_heap; // a max heap
+        priority_queue<int, vector<int>,greater<int>> min_heap; // a min heap
+    }
+```
+To deal with user defined type, we must define the rules for bigger/smaller, consider the following example
+```c++
+#include<utility> //std::pair, std::make_pair
+#include<vector>
+#include<queue>
+#include<iostream>
+using std::vector;
+using std::pair;
+using std::make_pair;
+using std::priority_queue;
+
+int main(){
+    //lambdas
+    auto udr =[](pair<int,int> p1,pair<int,int>p1){ //udr = user defined rule.
+            return p1.first + p1.second > p2.first + p2.second;
+        };
+    priority_queue<pair<int,int>,vector<pair<int,int>>,decltype(udr)> pq(udr);//min heap
+    pair<int,int> p1 = make_pair(2,9);
+    pair<int,int> p2(3,5);
+    pq.push(p1);
+    pq.push(p2);
+    int p = pq.top().first;
+    std::cout << p << std::endl; // 3 is printed. 
+}
+ 
+```
+in the lambdas body if you flip  ">" to "<" then you will get a max heap. 
+
 
 ## Application example: buy and sell stock
 Suppose we have historical stock prices data, we want to know when stock was bought and when it was sold would maxize the profit. supposing stock prices stored in an array such that at the element at index i is the price at time i. 
