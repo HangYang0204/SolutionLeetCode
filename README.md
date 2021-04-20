@@ -80,4 +80,7 @@ int main(){
 [go to here](../main/ArraySearchProblems/README.md)
 
 ## LinkedList Traversal
-[go to here](../main/LinkedListTraversal/ReadMe.md)
+[go to here](../main/LinkedListProblems/ReadMe.md)
+
+## C++ the language
+[go to here](../main/ArraySearchProblems/HardC++/Readme.md)
