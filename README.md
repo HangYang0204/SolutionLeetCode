@@ -76,3 +76,8 @@ int main(){
 }
 
 ```
+## Array Traversal
+[go to here](../ArraySearchProblems/README.md)
+
+## LinkedList Traversal
+[go to here](../LinkedListTraversal/ReadMe.md)
