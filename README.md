@@ -77,7 +77,7 @@ int main(){
 
 ```
 ## Array Traversal
-[go to here](../blob/main/ArraySearchProblems/README.md)
+[go to here](../main/ArraySearchProblems/README.md)
 
 ## LinkedList Traversal
-[go to here](../blob/main/LinkedListTraversal/ReadMe.md)
+[go to here](../main/LinkedListTraversal/ReadMe.md)
