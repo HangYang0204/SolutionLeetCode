@@ -74,8 +74,54 @@ int main(){
         if(v != vec.back()) std::cout << v << ", ";
     }
 }
+```
+
+## Find next Lexicographically greater permutation(LGP)
+__Step 1__ find the position we want to increase.\
+By observation, one can reason that if we can find the non-strick descreasing order of the whole or some right part of the array, then the next LGP is by changing the element in the left. For example:
+1. [4,3,2,1] no such element can be found, this is already the last/greatest permutation.
+2. [6,4,5,3,2,1] we can divide it into 2 parts [6,4] [5,3,2,1], since [5,3,2,1] does not have greater permutation itself, we must consider new elements in [6,4], since the further to the left,  greater the permutation, we should choose 4 in the example(rightmost in the left part).
+> Divide the array into left|right parts. right part should be already sorted(descending oder) subarray. Let the rightmost element from the left be pivot.
+
+__Step 2__ Lets give such element a name __pivot__. We should increase pivot by swap it with the smallest element from right part which is greater than the pivot, in our case is 5. Now we have [6,5][4,3,2,1].\
+
+__Step 3__ In step 2 we increase the element in the position discovered in step 1. Now if possible to make the right part minimal, then the result array would be next LGP. And further observation reveals that the "sorting" is simply a reverse. in our example the array becomes [6,5,1,2,3,4]. And indeed is the result we are looking for. 
+>If we keep finding the next LGP, eventually we will find last Permutation which is in a non-strick descreasing order. If we start from an unsorted array, then the alogrithm is actually a sorting. We can use the mirror process to get a non-strick increasing ordered array. 
+
+__Step 4__ __(Improvement)__. for Step 2 We can use Binary search to find the smallest element from right part which is greater than the pivot because the right part is a sorted array. __BFS when we reduce size, we should never exclude the possible candidates__
+```c++
+#include<vector>
+#include<iostream>
+using std::vector;
+
+//Create a function using BFS to find smallest element in certain range of an sorted array
+//that is greater than a given key. Return the index of that element
+int BFS(vector<int>&vec, int l, int r, int key){
+    int index = 0;
+    while(l <= r){
+        int mid = l + (l - r)/2;
+        if(vec[mid] <= key){
+            r = mid - 1;
+        }
+        else{
+            l = mid + 1;
+            if(index == -1 || vec[index] >= vec[mid]){//if index too big reduce it 
+                index = mid;
+            }
+        }
+    }
+    return index;
+}
+//driver code
+int main(){
+    vector<int>test = {9,0,4,6,5,3,2,1};
+    int key = 4;
+    int idx = BFS(test,3,7,key);
+    std::cout << "the key is:" << key << " and the element is : " << test[idx] << std::endl;
+}
 
 ```
+
 ## Array Traversal
 [go to here](../main/ArraySearchProblems/README.md)
 
