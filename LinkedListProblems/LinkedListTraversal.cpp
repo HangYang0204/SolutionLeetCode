@@ -28,8 +28,9 @@ void ListTraversal(ListNode* root){
 
 ListNode* ReverseLinkedList(ListNode* root){
     //this will return the reversed list root
+    if(root == nullptr || root->next == nullptr) return root;
     ListNode* curr = root;
-    ListNode* prev; 
+    ListNode* prev = NULL; 
     /*
     null -> a -> b -> c 
     ----------------------------------------
@@ -44,7 +45,7 @@ ListNode* ReverseLinkedList(ListNode* root){
     prev = a | curr = b | post = b another copy.
     ----------------------------------------    
     */
-    while(curr != nullptr){
+    while(curr!= nullptr){
         ListNode* post = curr->next; //perserve the next info
         curr->next = prev;
         prev = curr;
@@ -53,7 +54,22 @@ ListNode* ReverseLinkedList(ListNode* root){
     //after the loop curr == nullptr and perv become the new root
     return prev;
 }
-//driver
+//[1,2,7,5,6]
+int test1(){
+    ListNode* d = new ListNode(6);
+    ListNode* c = new ListNode(5,d);
+    ListNode* b = new ListNode(7,c);
+    ListNode* a = new ListNode(2,b);
+    ListNode* root = new ListNode(1,a);
+    ListTraversal(root);
+    ListNode* newroot = ReverseLinkedList(root);
+    ListTraversal(newroot);
+}
+//[]
+int test2(){}
+//[1]
+int test3(){}
+
 int main(){
     ListNode* d = new ListNode(6);
     ListNode* c = new ListNode(5,d);
