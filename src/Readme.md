@@ -51,7 +51,7 @@ while([condition z])
 ```
 
 
-### Key poin
+### Key point
 We start from the root, using pointer cur as a marker, by moving cur we traverse the tree.
 1. Morris algo is to make use of idle pointers of the tree to save space -- O(1)
 2. Using most right node -> cur or "Borrow Tree pointer" is the timing you move your cur to the left and restart from the new position.
