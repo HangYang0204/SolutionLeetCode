@@ -86,3 +86,8 @@ Algorithm:
 4. Now we need to compare the result from step 3 and 4 to find the global minimum then return the slicing scheme accordingly. 
 
 __Note that : this solution can only give one possible way to slice it. the complete list of ways to slice need further efforts__
+
+## Sliding window 
+__one of the most important tool__
+To maintain a sliding window with index left and right in an array. The condition to expand window righ++ and shrink window left++ needs to be well defined, secondly to be aware of what to update when window size change. Lastly, the condition to stop is at least right reaches the end of the array, other conditions to apply (eg. invalid window left > right etc.)
+
